@@ -8,8 +8,8 @@ import DashboardScreen from '../screens/DashboardScreen';
 import AddTransactionScreen from '../screens/AddTransactionScreen';
 import EditTransactionScreen from '../screens/EditTransactionScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import ChangePasswordScreen from '../screens/ChangePasswordScreen' 
-import FAQScreen from '../screens/FAQScreen';
+import ChangePasswordScreen from '../screens/ChangePasswordScreen'; 
+import FAQScreen from '../screens/FAQScreen'; 
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -75,21 +75,23 @@ export default function AppNavigator() {
       />
       
       <Stack.Screen 
+        name="EditTransaction" 
+        component={EditTransactionScreen} 
+        options={{ title: 'Edit Transaksi', headerStyle: { backgroundColor: '#0284c7' }, headerTintColor: '#fff' }} 
+      />
+      
+      <Stack.Screen 
         name="ChangePassword" 
         component={ChangePasswordScreen} 
-        options={{ 
-          headerShown: false
-        }} 
+        options={{ headerShown: false }} 
       />
 
       <Stack.Screen 
         name="FAQScreen" 
         component={FAQScreen} 
-        options={{ 
-          headerShown: false
-        }} 
+        options={{ headerShown: false }} 
       />
       
     </Stack.Navigator>
   );
-}
+} 

@@ -3,9 +3,6 @@ import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
-// ============================================================================
-// 1. DATA PERTANYAAN (Simulasi Data dari Backend/Statis)
-// ============================================================================
 const faqData = [
   {
     id: '1',
@@ -29,11 +26,7 @@ const faqData = [
   },
 ];
 
-// ============================================================================
-// 2. REUSABLE COMPONENT: FAQ Item (Accordion)
-// ============================================================================
 const FAQItem = ({ question, answer }) => {
-  // State lokal untuk mengatur apakah panel jawaban sedang terbuka atau tertutup
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -52,7 +45,6 @@ const FAQItem = ({ question, answer }) => {
         />
       </TouchableOpacity>
       
-      {/* Jika isExpanded true, tampilkan teks jawaban */}
       {isExpanded && (
         <View className="pb-5 pr-4">
           <Text className="text-slate-500 text-sm leading-relaxed">
@@ -64,44 +56,33 @@ const FAQItem = ({ question, answer }) => {
   );
 };
 
-// ============================================================================
-// 3. MAIN SCREEN
-// ============================================================================
 export default function FAQScreen({ navigation }) {
   return (
     <SafeAreaView className="flex-1 bg-white">
       
-      {/* --- HEADER NAVIGASI --- */}
       <View className="flex-row items-center justify-between px-4 py-3 bg-white">
         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2 -ml-2">
-          <Ionicons name="arrow-back" size={24} color="#334155" />
+            <Ionicons name="arrow-back" size={24} color="#334155" />
         </TouchableOpacity>
         
-        <Text className="text-slate-800 text-base font-bold">
-          Help & Support
+        <Text className="flex-1 text-slate-800 text-base font-bold ml-2">
+            Help & Support
         </Text>
-        
-        <TouchableOpacity className="p-2 -mr-2">
-          <Ionicons name="search-outline" size={22} color="#334155" />
-        </TouchableOpacity>
+
       </View>
 
-      {/* --- KONTEN UTAMA --- */}
       <ScrollView 
         contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 40, paddingTop: 20 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* Sub-judul kecil */}
         <Text className="text-center text-slate-800 text-xs font-bold tracking-widest uppercase mb-4">
-          FAQ
+          Informasi
         </Text>
 
-        {/* Judul Besar */}
         <Text className="text-center text-slate-900 text-3xl font-extrabold mb-10 leading-tight">
-          Answers to our most frequently asked questions
+          Jawaban yang paling sering ditanyakan kepada kami
         </Text>
 
-        {/* --- DAFTAR FAQ (MAPPING DATA) --- */}
         <View className="border-t border-slate-100">
           {faqData.map((item) => (
             <FAQItem 
