@@ -6,23 +6,18 @@ import { Ionicons } from '@expo/vector-icons';
 const faqData = [
   {
     id: '1',
-    question: 'How do I export my financial reports?',
-    answer: 'You can export your financial reports by going to the Profile menu, selecting "Export Data", and choosing your preferred format (PDF or CSV).',
+    question: 'Bagaimana Cara Melakukan Pencatatan?',
+    answer: 'Anda dapat melakukan pencatatan pada halaman Beranda. Selain itu, Anda juga dapat menambah, mengubah, dan menghapus catatan secara langsung.',
   },
   {
     id: '2',
-    question: 'How can I change my PIN?',
-    answer: 'To change your PIN, navigate to the Security settings within your Profile, enter your current PIN, and then set a new one.',
+    question: 'Bagaimana Cara Mengubah Password?',
+    answer: 'Silakan akses halaman Profil, kemudian pilih menu Keamanan untuk mengatur Kata Sandi dan PIN Anda.',
   },
   {
     id: '3',
-    question: 'Why is my recent transaction pending?',
-    answer: 'Transactions usually appear as pending while the merchant confirms the final amount. This process typically takes 1-3 business days. If a transaction has been pending for longer than 5 days, please contact support.',
-  },
-  {
-    id: '4',
-    question: 'What happens if I lose my card?',
-    answer: 'If you lose your card, immediately freeze it using the app settings and contact our 24/7 customer support to request a replacement.',
+    question: 'Alasan Kami Membangun Program Mobile Pencatatan',
+    answer: 'Program ini dirancang untuk memenuhi kebutuhan bersama dalam mengelola keuangan, di tengah padatnya aktivitas yang sering kali membuat kita mengabaikan pentingnya pencatatan finansial.',
   },
 ];
 
@@ -60,13 +55,13 @@ export default function FAQScreen({ navigation }) {
   return (
     <SafeAreaView className="flex-1 bg-white">
       
-      <View className="flex-row items-center justify-between px-4 py-3 bg-white">
+      <View className="flex-row items-center bg-sky-600 justify-between px-4 py-3 ">
         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2 -ml-2">
-            <Ionicons name="arrow-back" size={24} color="#334155" />
+            <Ionicons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
         
-        <Text className="flex-1 text-slate-800 text-base font-bold ml-2">
-            Help & Support
+        <Text className="flex-1 text-white text-base font-bold ml-2">
+            Bantuan & Dukungan
         </Text>
 
       </View>
