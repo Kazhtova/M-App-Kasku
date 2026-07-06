@@ -55,13 +55,13 @@ export default function FAQScreen({ navigation }) {
   return (
     <SafeAreaView className="flex-1 bg-white">
       
-      <View className="flex-row items-center bg-sky-600 justify-between px-4 py-3 ">
+      <View className="flex-row items-center justify-between px-4 py-3 bg-white">
         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2 -ml-2">
-            <Ionicons name="arrow-back" size={24} color="#fff" />
+            <Ionicons name="arrow-back" size={24} color="#334155" />
         </TouchableOpacity>
         
-        <Text className="flex-1 text-white text-base font-bold ml-2">
-            Bantuan & Dukungan
+        <Text className="flex-1 text-slate-800 text-base font-bold ml-2">
+            Help & Support
         </Text>
 
       </View>
