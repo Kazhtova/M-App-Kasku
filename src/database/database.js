@@ -1,10 +1,7 @@
 import * as SQLite from 'expo-sqlite';
 
-// 🚀 PERBAIKAN: Buat variabel penampung di luar fungsi (Singleton Pattern)
 let dbInstance = null;
 
-// Fungsi ini akan mengecek: jika pintu database sudah terbuka, gunakan yang ada. 
-// Jika belum, baru buka yang baru.
 export const getDatabaseConnection = async () => {
   if (!dbInstance) {
     dbInstance = await SQLite.openDatabaseAsync('kasku.db');
@@ -40,7 +37,7 @@ export const initDatabase = async () => {
         FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
       );
     `);
-console.log("Database & Tabel transactions berhasil diinisialisasi.");
+    console.log("Database & Tabel transactions berhasil diinisialisasi.");
   } catch (error) {
     console.error("Gagal menginisialisasi database:", error);
     throw error;

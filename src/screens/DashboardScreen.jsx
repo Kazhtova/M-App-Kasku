@@ -16,7 +16,6 @@ export default function DashboardScreen({ route, navigation }) {
 
   const loadData = async () => {
     try {
-      // 2. 🚀 KIRIMKAN ID USER saat memuat data transaksi
       const data = await transactionService.getAllTransactions(user.id);
       setTransactions(data);
     } catch (error) {
@@ -30,27 +29,18 @@ export default function DashboardScreen({ route, navigation }) {
     }
   }, [isFocused]);
 
-  // .... Sisa kode kalkulasi summary dan filter search di bawahnya tetap sama ....
 
-  // Kalkulasi saldo
   const summary = calculateFinanceSummary(transactions);
 
-  // Logika Filter & Search
-// Logika Filter & Search (Dua Kolom: Keterangan & Nominal)
   const filteredTransactions = transactions.filter((tx) => {
-    // 1. Ambil kata kunci pencarian (jadikan huruf kecil semua)
     const keyword = search.toLowerCase();
 
-    // 2. Kolom 1: Cek apakah cocok dengan Keterangan
     const matchesDescription = tx.description.toLowerCase().includes(keyword);
     
-    // 3. Kolom 2: Ubah nominal amount menjadi string, lalu cek apakah cocok dengan keyword
     const matchesAmount = tx.amount.toString().includes(keyword);
 
-    // 4. Jalankan Gerbang Logika OR (||): Cocok di keterangan ATAU cocok di nominal
     const matchesSearch = matchesDescription || matchesAmount;
     
-    // Filter berdasarkan jenis tombol (Semua / Pemasukan / Pengeluaran)
     const matchesFilter = filterType === 'all' || tx.type === filterType;
     
     return matchesSearch && matchesFilter;
@@ -58,19 +48,15 @@ export default function DashboardScreen({ route, navigation }) {
 
   return (
     <View className="flex-1 bg-slate-50 p-4">
-      {/* 1. Ringkasan Keuangan (Memanggil komponen SummaryCard yang benar) */}
       <SummaryCard summary={summary} />
 
-      {/* 2. Tombol Tambah Transaksi */}
       <TouchableOpacity
-        // 🚀 PERBAIKAN: Oper data user.id ke halaman AddTransaction
         onPress={() => navigation.navigate('AddTransaction', { userId: user.id })}
         className="bg-sky-600 p-4 rounded-xl items-center shadow-md active:bg-sky-700 mb-4"
       >
         <Text className="text-white font-bold text-base">+ Tambah Transaksi</Text>
       </TouchableOpacity>
 
-      {/* 3. Bar Pencarian */}
       <View className="mb-3">
         <TextInput
           className="bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-sm"
@@ -80,7 +66,6 @@ export default function DashboardScreen({ route, navigation }) {
         />
       </View>
 
-      {/* 4. Filter Buttons */}
       <View className="flex-row mb-4 justify-between">
         {['all', 'income', 'expense'].map((type) => (
           <TouchableOpacity
@@ -99,7 +84,6 @@ export default function DashboardScreen({ route, navigation }) {
         ))}
       </View>
 
-      {/* 5. Daftar Transaksi */}
       <Text className="text-slate-800 text-base font-bold mb-2">Riwayat Transaksi</Text>
       
       <View className="flex-1">

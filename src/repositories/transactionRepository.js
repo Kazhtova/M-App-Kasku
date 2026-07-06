@@ -1,7 +1,6 @@
 import { getDatabaseConnection } from '../database/database';
 
 export const transactionRepository = {
-  // 1. CREATE (Tambah Transaksi)
 async getAllByUserId(userId) {
     const db = await getDatabaseConnection();
     return await db.getAllAsync(
@@ -10,7 +9,6 @@ async getAllByUserId(userId) {
     );
   },
 
-  // 🚀 AMBIL SEMUA DATA (Hanya untuk keperluan debug database logger)
   async getAll() {
     const db = await getDatabaseConnection();
     return await db.getAllAsync('SELECT * FROM transactions ORDER BY id DESC');
@@ -26,7 +24,6 @@ async getAllByUserId(userId) {
     );
   },
 
-  // 3. UPDATE (Ubah Data Transaksi)
   async update(id, transaction) {
     const db = await getDatabaseConnection();
     const { type, amount, description, transaction_date } = transaction;
@@ -38,7 +35,6 @@ async getAllByUserId(userId) {
     return true;
   },
 
-  // 4. DELETE (Hapus Transaksi)
   async delete(id) {
     const db = await getDatabaseConnection();
     await db.runAsync('DELETE FROM transactions WHERE id = ?', [id]);

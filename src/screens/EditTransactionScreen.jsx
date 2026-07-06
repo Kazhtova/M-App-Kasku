@@ -13,14 +13,12 @@ export default function EditTransactionScreen({ route, navigation }) {
   const [description, setDescription] = useState(transaction.description);
   const [date, setDate] = useState(transaction.transaction_date);
 
-  // 🚀 2. State untuk mengontrol visibilitas Modal Hapus
   const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
 
-  // --- FUNGSI UPDATE ---
   const handleUpdate = async () => {
     try {
       const updatedPayload = {
-        user_id: transaction.user_id, // Tetap menjaga relasi database
+        user_id: transaction.user_id,
         type,
         amount: parseFloat(amount),
         description,
@@ -29,7 +27,6 @@ export default function EditTransactionScreen({ route, navigation }) {
 
       await transactionService.updateTransaction(transaction.id, updatedPayload);
       
-      // 🚀 3. Ganti Alert Sukses bawaan menjadi Toast
       Toast.show({
         type: 'success',
         text1: 'Berhasil Diperbarui',
@@ -47,15 +44,12 @@ export default function EditTransactionScreen({ route, navigation }) {
     }
   };
 
-  // --- FUNGSI HAPUS ---
-  // 🚀 4. Fungsi ini sekarang hanya bertugas memunculkan Modal
   const handleDelete = () => {
     setDeleteModalVisible(true);
   };
 
-  // 🚀 5. Ini adalah fungsi eksekusi asli yang dipanggil oleh tombol "Ya, Hapus" di dalam Modal
   const executeDelete = async () => {
-    setDeleteModalVisible(false); // Tutup modal animasinya dulu
+    setDeleteModalVisible(false); 
     
     try {
       await transactionService.deleteTransaction(transaction.id);
@@ -81,7 +75,6 @@ export default function EditTransactionScreen({ route, navigation }) {
     <ScrollView className="flex-1 bg-slate-50 p-4">
       <View className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm mb-6">
         
-        {/* Pilihan Jenis Transaksi */}
         <Text className="text-slate-600 font-semibold mb-2 text-sm">Jenis Transaksi</Text>
         <View className="flex-row justify-between mb-4">
           <TouchableOpacity
@@ -107,7 +100,6 @@ export default function EditTransactionScreen({ route, navigation }) {
           </TouchableOpacity>
         </View>
 
-        {/* Input Nominal */}
         <Text className="text-slate-600 font-semibold mb-1 text-sm">Nominal (Rp)</Text>
         <TextInput
           className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-800 mb-4 font-semibold text-base"
@@ -116,7 +108,6 @@ export default function EditTransactionScreen({ route, navigation }) {
           onChangeText={setAmount}
         />
 
-        {/* Input Keterangan */}
         <Text className="text-slate-600 font-semibold mb-1 text-sm">Keterangan</Text>
         <TextInput
           className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-800 mb-4 text-sm"
@@ -124,7 +115,6 @@ export default function EditTransactionScreen({ route, navigation }) {
           onChangeText={setDescription}
         />
 
-        {/* Input Tanggal */}
         <Text className="text-slate-600 font-semibold mb-1 text-sm">Tanggal (YYYY-MM-DD)</Text>
         <TextInput
           className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-800 mb-6 text-sm"
@@ -132,7 +122,6 @@ export default function EditTransactionScreen({ route, navigation }) {
           onChangeText={setDate}
         />
 
-        {/* Tombol Update (Warna Biru Utama) */}
         <TouchableOpacity
           onPress={handleUpdate}
           className="bg-sky-600 p-4 rounded-xl items-center active:bg-sky-700 shadow-md mb-3"
@@ -140,7 +129,6 @@ export default function EditTransactionScreen({ route, navigation }) {
           <Text className="text-white font-bold text-base">Simpan Perubahan</Text>
         </TouchableOpacity>
 
-        {/* Tombol Delete (Warna Merah untuk Bahaya) */}
         <TouchableOpacity
           onPress={handleDelete} // 🚀 Sekarang hanya memicu Modal
           className="bg-rose-50 p-4 rounded-xl items-center border-2 border-rose-200 active:bg-rose-100"
@@ -150,7 +138,6 @@ export default function EditTransactionScreen({ route, navigation }) {
 
       </View>
 
-      {/* 🚀 6. Render Modal Konfirmasi Hapus di tumpukan paling bawah */}
       <ConfirmModal
         visible={isDeleteModalVisible}
         title="Konfirmasi Hapus"

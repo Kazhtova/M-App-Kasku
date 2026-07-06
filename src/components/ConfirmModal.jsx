@@ -16,19 +16,16 @@ export default function ConfirmModal({
       transparent={true}
       visible={visible}
       animationType="fade" 
-      onRequestClose={onCancel} // Menangani tombol back fisik di OS Android
+      onRequestClose={onCancel}
     >
-      {/* 🚀 PERBAIKAN UX: Backdrop Press (Latar belakang transparan yang bisa diklik untuk membatalkan) */}
       <Pressable 
         className="flex-1 bg-black/60 justify-center items-center px-6"
         onPress={onCancel}
       >
-        {/* 🚀 Mencegah sentuhan menembus ke belakang saat kotak putih ditekan */}
         <Pressable 
           className="bg-white w-full p-6 rounded-2xl shadow-lg"
-          onPress={() => {}} // Fungsi kosong agar klik terhenti di sini (event consumption)
+          onPress={() => {}} 
         >
-          {/* Hierarki Visual yang Dipertajam */}
           <Text className="text-slate-800 text-lg font-bold mb-1 text-center tracking-tight">
             {title}
           </Text>
@@ -36,7 +33,6 @@ export default function ConfirmModal({
             {message}
           </Text>
 
-          {/* Menggunakan gap untuk jarak antar-tombol yang lebih presisi dan modern */}
           <View className="flex-row justify-between gap-3">
             <TouchableOpacity 
               onPress={onCancel}

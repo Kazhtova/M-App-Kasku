@@ -11,7 +11,6 @@ const handleAuth = async () => {
     try {
       const user = await authService.loginOrRegister(username, password);
       
-      // 🚀 PERBAIKAN: Arahkan ke 'MainTabs', bukan 'Dashboard'
       navigation.replace('MainTabs', { user });
     } catch (error) {
       Alert.alert("Autentikasi Gagal", error.message);
@@ -43,7 +42,7 @@ const handleAuth = async () => {
         <TextInput
           className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-800 mb-8"
           placeholder="Masukkan password rahasia..."
-          secureTextEntry // Menyembunyikan teks menjadi titik-titik
+          secureTextEntry 
           value={password}
           onChangeText={setPassword}
         />

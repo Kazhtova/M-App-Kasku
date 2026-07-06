@@ -4,33 +4,28 @@ import { transactionService } from '../services/transactionService';
 import { getTodayDateString } from '../utils/date';
 import Toast from 'react-native-toast-message';
 
-// 🚀 PERBAIKAN: Tambahkan properti { route } untuk menangkap data dari navigasi
 export default function AddTransactionScreen({ route, navigation }) {
-  // 🚀 PERBAIKAN: Ambil userId yang dioper dari Dashboard Screen
   const { userId } = route.params || {};
 
-  // 1. Inisialisasi State Form murni sesuai dengan validasi
-  const [type, setType] = useState('income'); // default: pemasukan (income)
+  const [type, setType] = useState('income'); 
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
-  const [date, setDate] = useState(getTodayDateString()); // Otomatis terisi tanggal hari ini (YYYY-MM-DD)
+  const [date, setDate] = useState(getTodayDateString()); 
 
-  // 2. Fungsi Handler untuk Menyimpan Data ke SQLite via Service Layer
   const handleSave = async () => {
     try {
-      // Transformasi & bungkus data ke dalam objek payload
       const payload = {
-        user_id: userId, // 🚀 PERBAIKAN: Masukkan user_id ke dalam payload transaksi
+        user_id: userId, 
         type,
-        amount: parseFloat(amount), // Konversi teks input menjadi angka desimal/real
+        amount: parseFloat(amount), 
         description,
         transaction_date: date,
       };
 
-      // Jalankan business logic & query SQL melalui Service Layer
+  
       await transactionService.addTransaction(payload);
       
-      // 1. Picu Toast-nya muncul terlebih dahulu
+
       Toast.show({
         type: 'success',
         text1: 'Berhasil!',
@@ -38,12 +33,8 @@ export default function AddTransactionScreen({ route, navigation }) {
         position: 'top',
       });
 
-      // 2. Berikan jeda waktu 500 milidetik (0.5 detik) baru halaman kembali ke Dashboard
-      setTimeout(() => {
-        navigation.goBack();
-      }, 500);
+      navigation.goBack();
     } catch (error) {
-      // Jika gagal validasi di sisi service, tangkap pesannya dan tampilkan ke user
       Alert.alert("Gagal Validasi", error.message);
     }
   };
@@ -52,7 +43,6 @@ export default function AddTransactionScreen({ route, navigation }) {
     <ScrollView className="flex-1 bg-slate-50 p-4">
       <View className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm mb-6">
         
-        {/* Bagian A: Pilihan Jenis Transaksi (Radio Button Kustom) */}
         <Text className="text-slate-600 font-semibold mb-2 text-sm">Jenis Transaksi</Text>
         <View className="flex-row justify-between mb-4">
           <TouchableOpacity
@@ -82,7 +72,7 @@ export default function AddTransactionScreen({ route, navigation }) {
           </TouchableOpacity>
         </View>
 
-        {/* Bagian B: Input Nominal */}
+
         <Text className="text-slate-600 font-semibold mb-1 text-sm">Nominal (Rp)</Text>
         <TextInput
           className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-800 mb-4 font-semibold text-base"
@@ -92,16 +82,16 @@ export default function AddTransactionScreen({ route, navigation }) {
           onChangeText={setAmount}
         />
 
-        {/* Bagian C: Input Keterangan */}
+
         <Text className="text-slate-600 font-semibold mb-1 text-sm">Keterangan</Text>
         <TextInput
           className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-800 mb-4 text-sm"
-          placeholder="Contoh: Uang Jajan, Gaji, Makan Siang"
+          placeholder="Contoh: Gaji, Makan Siang"
           value={description}
           onChangeText={setDescription}
         />
 
-        {/* Bagian D: Input Tanggal */}
+
         <Text className="text-slate-600 font-semibold mb-1 text-sm">Tanggal (YYYY-MM-DD)</Text>
         <TextInput
           className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-800 mb-6 text-sm"
@@ -110,7 +100,7 @@ export default function AddTransactionScreen({ route, navigation }) {
           onChangeText={setDate}
         />
 
-        {/* Bagian E: Tombol Submit */}
+
         <TouchableOpacity
           onPress={handleSave}
           className="bg-sky-600 p-4 rounded-xl items-center active:bg-sky-700 shadow-md"
